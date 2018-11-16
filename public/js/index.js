@@ -10,31 +10,23 @@ socket.on('disconnect', () => {
 })
 
 socket.on('newMessage', message => {
-  console.log('New Message', message)
-  // const li = $('<li></li>')
-  // li.text(`${message.from}: ${message.text}`)
+  const time = moment(message.createdAt).format('h:mm A')
 
-  // $('#messages').append(li)
   const ol = document.getElementById('messages')
   const li = document.createElement('li')
 
-  li.innerHTML = `${message.from}: ${message.text}`
+  li.innerHTML = `${message.from} ${time}: ${message.text}`
 
   ol.appendChild(li)
 })
 
 socket.on('newLocationMessage', message => {
-  // const li = $('<li></li>')
-  // const a = $('<a target="_blank">My Current Location</a>')
-  
-  // li.text(`${message.from}: `)
-  // a.attr('href', message.url)
-  // li.append(a)
-  // $('#messages').append(li)
+  const time = moment(message.createdAt).format('h:mm A')
+
   const li = document.createElement('li')
   const a = document.createElement('a')
   const ol = document.getElementById('messages')
-  li.innerHTML = `${message.from}: `
+  li.innerHTML = `${message.from} ${time}: `
   a.innerHTML = 'My Current Location'
   a.setAttribute('href', message.url)
   a.setAttribute('target', '_blank')
